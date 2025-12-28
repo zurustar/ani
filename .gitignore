@@ -12,3 +12,6 @@ main
 # Editor
 .vscode
 .idea
+
+# SYSTEM
+.DS_Store

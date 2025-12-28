@@ -10,8 +10,19 @@ It generates an animation where a specified source image moves horizontally from
 
 ## Installation
 
+
 ```bash
 go install github.com/zurustar/ani@latest
+```
+
+## Build from Source
+
+To build the binary yourself:
+
+```bash
+git clone https://github.com/zurustar/ani.git
+cd ani
+go build -o ani main.go
 ```
 
 ## Usage
