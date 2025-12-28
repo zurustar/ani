@@ -34,11 +34,12 @@ The application will be a single Command Line Interface (CLI) tool.
     -   *Clarification*: If the user wants it to fly *in* and fly *out*, we can adjust, but "move left to right" usually implies staying within bounds or traversing. Let's assume **Left-aligned to Right-aligned** traversal for V1.
 
 ### Mathematical Logic
--   `Total Frames = (Duration * 100) / Delay`
+-   **Frame Count Calculation**: `Total Frames = Floor((Duration * 100) / Delay)`
+    -   *Note*: If `Duration` is not perfectly divisible by `Delay`, the actual total duration of the GIF will be slightly less than the specified `Duration`. We prioritize keeping the usage of `Delay` consistent for generic GIF players.
 -   `Step Size (pixels/frame) = (CanvasWidth - ImageWidth) / (TotalFrames - 1)`
 -   Frame `i`: `x = i * StepSize`
 
 ## Libraries
 -   Standard `flag` for CLI.
--   `image/gif`, `image/png`, `image/jpeg` for I/O.
+-   `image/gif`, `image/png` for I/O.
 -   `github.com/fogleman/gg` for easy drawing.

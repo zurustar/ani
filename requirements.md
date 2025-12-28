@@ -5,7 +5,7 @@ A CLI tool to create an animated GIF where a specified small image moves from le
 
 ## Functional Requirements
 1.  **Input**:
-    -   Path to the source image (the "small image").
+    -   Path to the source image (the "small image"). Supported formats: PNG only.
     -   Duration of the animation (in seconds).
     -   Output GIF width (height will be same as input image).
     -   Delay per frame (in centiseconds, 1/100s). Default to typical value (e.g., 3-4cs for ~30fps).
