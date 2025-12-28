@@ -3,6 +3,8 @@ package animator
 import (
 	"image"
 
+	"image/color"
+	"image/color/palette"
 	"image/gif"
 	"math"
 
@@ -29,6 +31,34 @@ func NewAnimator(inputImage image.Image, duration float64, delay int, width int)
 	}
 }
 
+// generatePalette inspects the image and creates an optimal palette.
+func generatePalette(img image.Image) color.Palette {
+	// Simple color frequency map
+	colors := make(map[color.Color]bool)
+	bounds := img.Bounds()
+	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+		for x := bounds.Min.X; x < bounds.Max.X; x++ {
+			colors[img.At(x, y)] = true
+		}
+	}
+
+	// If total colors <= 255, we can preserve them exactly (leaving room for transparency)
+	if len(colors) <= 255 {
+		p := make(color.Palette, 0, len(colors)+1)
+		for c := range colors {
+			p = append(p, c)
+		}
+		p = append(p, color.Transparent)
+		return p
+	}
+
+	// Fallback to Plan9 + transparent if too many colors
+	p := make(color.Palette, len(palette.Plan9)+1)
+	copy(p, palette.Plan9)
+	p[len(palette.Plan9)] = color.Transparent
+	return p
+}
+
 // GenerateGIF creates the animated GIF.
 func (a *Animator) GenerateGIF() (*gif.GIF, error) {
 	// Calculate total frames: Floor((Duration * 100) / Delay)
@@ -45,6 +75,9 @@ func (a *Animator) GenerateGIF() (*gif.GIF, error) {
 		stepSize = float64(a.Width-imgWidth) / float64(totalFrames-1)
 	}
 
+	// Generate palette once
+	p := generatePalette(a.InputImage)
+
 	outGIF := &gif.GIF{
 		LoopCount: 0, // Infinite loop
 	}
@@ -53,9 +86,8 @@ func (a *Animator) GenerateGIF() (*gif.GIF, error) {
 		x := int(float64(i) * stepSize)
 
 		// Use renderer to draw the frame
-		// For now, we use Plan9 palette for simplicity as determined in design.md.
-		// Transparency handling will be inside renderer.
-		frame := renderer.RenderFrame(a.InputImage, a.Width, a.Height, x, 0)
+		// Pass the custom palette
+		frame := renderer.RenderFrame(a.InputImage, a.Width, a.Height, x, 0, p)
 
 		outGIF.Image = append(outGIF.Image, frame)
 		outGIF.Delay = append(outGIF.Delay, a.Delay)

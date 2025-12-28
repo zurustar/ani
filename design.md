@@ -22,8 +22,11 @@ The application will be a single Command Line Interface (CLI) tool.
 
 ### GIF Optimization & Palette
 -   **Transparency**: The background will be transparent. We need to ensure the `image/gif` encoder handles the transparent index correctly.
--   **Palette**: We will use a standard palette (e.g., `palette.Plan9` or generated from the image) but ensure index 0 (or specific index) is reserved for transparency.
--   **Quantization**: For simplicity in V1, we will use a standard palette. If the input image has many colors, we might need a quantizer, but starting with a standard palette is safer for "simple/small images".
+-   **Palette**: 
+    -   We generate a dynamic palette based on the unique colors in the input image.
+    -   If the image has <= 255 unique colors, we preserve them exactly (plus transparency).
+    -   If the image has > 255 unique colors, we fallback to `palette.Plan9` but ensure transparency is included.
+-   **Quantization**: For V1, the simple dynamic palette approach covers most use cases (icons, simple logos). Complex images with >256 colors will use the fallback standard palette.
 
 ### Coordinate System
 -   `x = 0`: Image left edge is at canvas left edge.

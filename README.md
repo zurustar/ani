@@ -28,13 +28,13 @@ go build -o ani main.go
 ## Usage
 
 ```bash
-ani -i <input_image> [flags]
+ani -i <input_image> -width <width> [flags]
 ```
 
 ### Flags
 -   `-i string`: Path to the source image (PNG only) [Required]
 -   `-o string`: Path to the output GIF file (default "output.gif")
--   `-duration float`: Duration of the animation in seconds (default 1.0)
+-   `-duration float`: Duration of the animation in seconds (default 60.0)
 -   `-width int`: Width of the output GIF [Required]
 -   `-delay int`: Delay per frame in centiseconds (default 4, approx 25fps)
 

@@ -15,7 +15,7 @@ import (
 func main() {
 	inputPath := flag.String("i", "", "Path to the source image (PNG only)")
 	outputPath := flag.String("o", "output.gif", "Path to the output GIF file")
-	duration := flag.Float64("duration", 1.0, "Duration of the animation in seconds")
+	duration := flag.Float64("duration", 60.0, "Duration of the animation in seconds")
 	width := flag.Int("width", 0, "Width of the output GIF")
 	delay := flag.Int("delay", 4, "Delay per frame in centiseconds (1/100s)")
 
@@ -27,7 +27,6 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
-
 
 	if *inputPath == "" {
 		fmt.Println("Error: Input file is required (-i)")
