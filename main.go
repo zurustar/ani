@@ -21,6 +21,14 @@ func main() {
 
 	flag.Parse()
 
+	if flag.NArg() > 0 {
+		fmt.Printf("Error: Unexpected arguments found: %v\n", flag.Args())
+		fmt.Println("Did you provide a value without a flag or forget a '-' prefix?")
+		flag.Usage()
+		os.Exit(1)
+	}
+
+
 	if *inputPath == "" {
 		fmt.Println("Error: Input file is required (-i)")
 		flag.Usage()
