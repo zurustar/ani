@@ -4,7 +4,10 @@ main
 
 # Test Output/Input
 *.gif
+# Ignore all PNGs by default
 *.png
+# Allow the test icon
+!test_icon.png
 
 # Editor
 .vscode
