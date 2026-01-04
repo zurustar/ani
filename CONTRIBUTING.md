@@ -11,7 +11,11 @@ Always create a new branch for any feature addition or modification. Do not comm
 git checkout -b feature/your-feature-name
 ```
 
-### 2. Documentation Driven Development
+### 2. Test Driven Development (TDD) and Testability
+1.  **Test First**: We prefer a Test Driven Development approach. Implement tests *before* writing the functional code.
+2.  **Testable Architecture**: Structure your code so that logic (e.g., math calculations, parsing, state changes) can be tested independently without generating full images or heavy artifacts. This ensures tests are fast, reliable, and easier to debug.
+
+### 3. Documentation Driven Development
 We adhere to a "Documentation First" approach. Before writing any code, you must update the project documentation in the following order:
 
 1.  **Update `requirements.md`**: Discuss and clarify requirements with the user/stakeholders. Document the agreed-upon requirements.

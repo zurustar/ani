@@ -37,6 +37,7 @@ ani -i <input_image> -width <width> [flags]
 -   `-duration float`: Duration of the animation in seconds (default 60.0)
 -   `-width int`: Width of the output GIF [Required]
 -   `-delay int`: Delay per frame in centiseconds (default 4, approx 25fps)
+-   `-bg string`: Background color in `#RRGGBB` format (default transparent)
 
 ### Example
 

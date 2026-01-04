@@ -15,7 +15,7 @@ A CLI tool to create an animated GIF where a specified small image moves from le
     -   Frame rate should be sufficient for smooth movement (e.g., 30 fps).
 3.  **Output**:
     -   A GIF file.
-    -   **Background**: Transparent. Only the source image is visible.
+    -   **Background**: Transparent by default. Can specify a solid color using HTML-style hex format (e.g., #RRGGBB).
 4.  **CLI Interface**:
     -   Flags for input file, output file, duration, width, height.
 
