@@ -25,7 +25,7 @@ func CalculateStepSize(canvasWidth, imgWidth, totalFrames int) float64 {
 	if totalFrames <= 1 {
 		return 0
 	}
-	return float64(canvasWidth-imgWidth) / float64(totalFrames-1)
+	return float64(canvasWidth+imgWidth) / float64(totalFrames-1)
 }
 
 // Animator handles the GIF generation logic.
@@ -92,11 +92,11 @@ func (a *Animator) GenerateGIF() (*gif.GIF, error) {
 	}
 
 	imgWidth := a.InputImage.Bounds().Dx()
-	// Step Size = (CanvasWidth - ImageWidth) / (TotalFrames - 1)
+	// Step Size = (CanvasWidth + ImageWidth) / (TotalFrames - 1)
 	// If TotalFrames is 1, stepSize is 0.
 	var stepSize float64
 	if totalFrames > 1 {
-		stepSize = float64(a.Width-imgWidth) / float64(totalFrames-1)
+		stepSize = float64(a.Width+imgWidth) / float64(totalFrames-1)
 	}
 
 	// Generate palette once
@@ -107,7 +107,8 @@ func (a *Animator) GenerateGIF() (*gif.GIF, error) {
 	}
 
 	for i := 0; i < totalFrames; i++ {
-		x := int(float64(i) * stepSize)
+		// Start from -imgWidth
+		x := int(float64(i)*stepSize) - imgWidth
 
 		// Use renderer to draw the frame
 		// Pass the custom palette
