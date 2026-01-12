@@ -37,10 +37,10 @@ func TestCalculateStepSize(t *testing.T) {
 		totalFrames int
 		want        float64
 	}{
-		{"Simple Move", 100, 10, 10, 10.0},       // (100-10) / 9 = 10
-		{"Static Image", 100, 10, 1, 0.0},        // 1 frame -> no step
-		{"No Movement Space", 100, 100, 10, 0.0}, // (100-100) / 9 = 0
-		{"Small Step", 20, 10, 5, 2.5},           // (20-10) / 4 = 2.5
+		{"Simple Move", 100, 10, 10, 12.2222},        // (100+10) / 9 = 12.2222...
+		{"Static Image", 100, 10, 1, 0.0},            // 1 frame -> no step
+		{"No Movement Space", 100, 100, 10, 22.2222}, // (100+100) / 9 = 22.2222...
+		{"Small Step", 20, 10, 5, 7.5},               // (20+10) / 4 = 7.5
 	}
 
 	for _, tt := range tests {
